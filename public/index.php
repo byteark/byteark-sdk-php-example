@@ -27,11 +27,18 @@ function array_except($array, $exceptKeys) {
     return $result;
 }
 
+function nextWeekAtMidnight($from) {
+    return $from - ($from % 86400) + (86400 * 7);
+}
+
 function handle($input) {
+    $whip = new \Vectorface\Whip\Whip(\Vectorface\Whip\Whip::REMOTE_ADDR);
+    $now = time();
+
     $response = $input + [
-        'current_client_ip' => (new \Vectorface\Whip\Whip())->getValidIpAddress(),
-        'current_timestamp' => time(),
-        'expires' => time() - (time() % 86400) + (86400 * 7),
+        'current_client_ip' => $whip->getValidIpAddress(),
+        'current_timestamp' => $now,
+        'expires' => nextWeekAtMidnight($now),
     ];
 
     if (!isset($input) || empty($input)) {

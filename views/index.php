@@ -17,12 +17,12 @@
             <form method="POST" action="index.php#result">
                 <h5 class="mt-5">Signer Options</h5>
                 <div class="form-group">
-                    <label for="access_id">Access ID (Currently optional)</label>
+                    <label for="access_id">Access ID <span class="text-muted">(Currently optional)</span></label>
                     <input class="form-control" type="text" name="access_id" value="<?php echo array_get($response, 'access_id', ''); ?>">
                 </div>
                 <div class="form-group">
                     <label for="access_secret">Access Secret</label>
-                    <input class="form-control" type="text" name="access_secret" value="<?php echo array_get($response, 'access_secret', ''); ?>">
+                    <input class="form-control" type="password" name="access_secret" value="<?php echo array_get($response, 'access_secret', ''); ?>">
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
@@ -53,18 +53,18 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label for="expires">Client IP (Optional)</label>
+                    <label for="expires">Client IP <span class="text-muted">(Optional)</span></label>
                     <input class="form-control" type="text" name="client_ip" value="<?php echo array_get($response, 'client_ip', ''); ?>">
                     <small id="emailHelp" class="form-text text-muted">
                         Current client IP is <?php echo array_get($response, 'current_client_ip', ''); ?>
                     </small>
                 </div>
                 <div class="form-group">
-                    <label for="expires">User Agent (Optional)</label>
+                    <label for="expires">User Agent <span class="text-muted">(Optional)</span></label>
                     <input class="form-control" type="text" name="usage_agent" value="<?php echo array_get($response, 'user_agent', ''); ?>">
                 </div>
                 <div class="form-group">
-                    <label for="expires">Path Prefix (Optional)</label>
+                    <label for="expires">Path Prefix <span class="text-muted">(Required if you want to sign a HLS (.m3u8) URL)</span></label>
                     <input class="form-control" type="text" name="path_prefix" value="<?php echo array_get($response, 'path_prefix', ''); ?>">
                 </div>
                 <div class="form-group">
