@@ -1,0 +1,6 @@
+{
+    "require": {
+        "byteark/byteark-sdk-php": "^0.1.6",
+        "vectorface/whip": "^0.3.1"
+    }
+}
