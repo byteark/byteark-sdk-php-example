@@ -10,7 +10,7 @@ set_error_handler("exception_error_handler");
 require_once('../vendor/autoload.php');
 
 function array_get($array, $key, $defaultValue = null) {
-    if (isset($array[$key])) {
+    if (isset($array[$key]) && $array[$key]) {
         return trim($array[$key]);
     } else {
         return $defaultValue;
@@ -31,18 +31,20 @@ function nextWeekAtMidnight($from) {
     return $from - ($from % 86400) + (86400 * 7);
 }
 
-function handle($input) {
+function makeDefaultResponseFields() {
     $whip = new \Vectorface\Whip\Whip(\Vectorface\Whip\Whip::REMOTE_ADDR);
     $now = time();
 
-    $response = $input + [
+    return [
         'current_client_ip' => $whip->getValidIpAddress(),
         'current_timestamp' => $now,
-        'expires' => nextWeekAtMidnight($now),
+        'suggested_expires' => nextWeekAtMidnight($now),
     ];
+}
 
+function handle($input) {
     if (!isset($input) || empty($input)) {
-        return $response;
+        return makeDefaultResponseFields() + $input;
     }
 
     try {
@@ -63,9 +65,9 @@ function handle($input) {
             ])
         );
 
-        return ['secure_url' => $signedUrl] + $response;
+        return ['secure_url' => $signedUrl] + makeDefaultResponseFields() + $input;
     } catch (\Exception $e) {
-        return ['error' => $e->getMessage()] + $response;
+        return ['error' => $e->getMessage()] + makeDefaultResponseFields() + $input;
     }
 }
 

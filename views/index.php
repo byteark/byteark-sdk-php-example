@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group">
                     <label for="expires">Expires (Timestamp)</label>
-                    <input class="form-control" type="text" name="expires" value="<?php echo array_get($response, 'expires', ''); ?>">
+                    <input class="form-control" type="text" name="expires" value="<?php echo array_get($response, 'expires', $response['suggested_expires']); ?>">
                     <small id="emailHelp" class="form-text text-muted">
                         Current timestamp is <?php echo array_get($response, 'current_timestamp', ''); ?>
                     </small>
