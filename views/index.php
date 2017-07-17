@@ -85,7 +85,7 @@
                 <?php if (array_get($response, 'secure_url'))
                 <div id="result" class="form-group">
                     <a class="btn btn-primary" target="_blank" href="<?php echo array_get($response, 'secure_url', ''); ?>">Open</a>
-                    <p><smaller>Clicking this link will use this page's URL as a referer</smaller></p>
+                    <p><smaller>Clicking this link will send this page URL as a referer</smaller></p>
                 </div>
                 ?>
             </form>
