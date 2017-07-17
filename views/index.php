@@ -63,8 +63,12 @@
                     </small>
                 </div>
                 <div class="form-group">
+                    <label for="expires">Referer<span class="text-muted">(Optional)</span></label>
+                    <input class="form-control" type="text" name="referer" value="<?php echo array_get($response, 'referer', ''); ?>">
+                </div>
+                <div class="form-group">
                     <label for="expires">User Agent <span class="text-muted">(Optional)</span></label>
-                    <input class="form-control" type="text" name="usage_agent" value="<?php echo array_get($response, 'user_agent', ''); ?>">
+                    <input class="form-control" type="text" name="user_agent" value="<?php echo array_get($response, 'user_agent', ''); ?>">
                 </div>
                 <div class="form-group">
                     <label for="expires">Path Prefix <span class="text-muted">(Required if you want to sign a HLS (.m3u8) URL)</span></label>

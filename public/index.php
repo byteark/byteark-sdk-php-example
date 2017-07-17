@@ -61,6 +61,7 @@ function handle($input) {
                 'method' => array_get($input, 'method'),
                 'path_prefix' => array_get($input, 'path_prefix'),
                 'client_ip' => array_get($input, 'client_ip'),
+                'referer' => array_get($input, 'referer'),
                 'user_agent' => array_get($input, 'user_agent'),
             ])
         );
