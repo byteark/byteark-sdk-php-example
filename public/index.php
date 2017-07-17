@@ -37,6 +37,7 @@ function makeDefaultResponseFields() {
 
     return [
         'current_client_ip' => $whip->getValidIpAddress(),
+        'current_user_agent' => array_get($_SERVER, 'HTTP_USER_AGENT', ''),
         'current_timestamp' => $now,
         'suggested_expires' => nextWeekAtMidnight($now),
     ];

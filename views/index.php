@@ -58,17 +58,23 @@
                 <div class="form-group">
                     <label for="expires">Client IP <span class="text-muted">(Optional)</span></label>
                     <input class="form-control" type="text" name="client_ip" value="<?php echo array_get($response, 'client_ip', ''); ?>">
-                    <small id="emailHelp" class="form-text text-muted">
+                    <small class="form-text text-muted">
                         Current client IP is <?php echo array_get($response, 'current_client_ip', ''); ?>
                     </small>
                 </div>
                 <div class="form-group">
                     <label for="expires">Referer<span class="text-muted">(Optional)</span></label>
                     <input class="form-control" type="text" name="referer" value="<?php echo array_get($response, 'referer', ''); ?>">
+                    <small class="form-text text-muted">
+                      To testing opening withinin this page, please use this value: https://docs.byteark.com/examples/byteark-sdk-php-example/index.php
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="expires">User Agent <span class="text-muted">(Optional)</span></label>
                     <input class="form-control" type="text" name="user_agent" value="<?php echo array_get($response, 'user_agent', ''); ?>">
+                    <small class="form-text text-muted">
+                        Current user agent is <?php echo array_get($response, 'current_user_agent', ''); ?>
+                    </small>
                 </div>
                 <div class="form-group">
                     <label for="expires">Path Prefix <span class="text-muted">(Required if you want to sign a HLS (.m3u8) URL)</span></label>
