@@ -82,12 +82,12 @@
                     <label for="secure_url">Generated Secure URL</label>
                     <input class="form-control" type="text" name="secure_url" value="<?php echo array_get($response, 'secure_url', ''); ?>" readonly>
                 </div>
-                <?php if (array_get($response, 'secure_url'))
+                <?php if (array_get($response, 'secure_url')) { ?>
                 <div id="result" class="form-group">
                     <a class="btn btn-primary" target="_blank" href="<?php echo array_get($response, 'secure_url', ''); ?>">Open</a>
                     <p><smaller>Clicking this link will send this page URL as a referer</smaller></p>
                 </div>
-                ?>
+                <?php } ?>
             </form>
         </div>
     </body>
