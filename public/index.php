@@ -33,10 +33,13 @@ function nextWeekAtMidnight($from) {
 
 function makeDefaultResponseFields() {
     $whip = new \Vectorface\Whip\Whip(\Vectorface\Whip\Whip::REMOTE_ADDR);
+    $clientIp = $whip->getValidIpAddress();
     $now = time();
 
     return [
-        'current_client_ip' => $whip->getValidIpAddress(),
+        'current_client_ip' => $clientIp,
+        'current_client_subnet16' => long2ip(ip2long($clientIp) & ip2long(255.255.0.0)),
+        'current_client_subnet24' => long2ip(ip2long($clientIp) & ip2long(255.255.255.0)),
         'current_user_agent' => array_get($_SERVER, 'HTTP_USER_AGENT', ''),
         'current_timestamp' => $now,
         'suggested_expires' => nextWeekAtMidnight($now),
