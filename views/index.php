@@ -113,8 +113,8 @@
                 <?php if (array_get($response, 'secure_url')) { ?>
                 <div id="result" class="form-group">
                     <a id="openLinkButton" class="btn btn-primary" target="_blank" href="<?php echo array_get($response, 'secure_url', ''); ?>">Open</a>
-                    <a id="showImageButton" class="btn btn-primary" href="#preview">Show Image</a>
-                    <a id="showVideoButton" class="btn btn-primary" href="#preview">Show Video</a>
+                    <button id="showImageButton" type="button" class="btn btn-primary">Show Image</button>
+                    <button id="showVideoButton" type="button" class="btn btn-primary">Show Video</button>
                 </div>
                 <?php } ?>
                 <div id="preview" class="form-group">
@@ -138,14 +138,15 @@
         $('#showVideoButton').click(function() {
             $('#preview').empty();
 
-            var playerElement = $('<div id="player">');
+            var playerElement = $('<video id="player" class="video-js byteark-skin" width="854" height="480" autoplay controls playsinline webkit-playsinline></video>');
             playerElement.appendTo('#preview');
 
             byteark('player', {
                 swf: 'https://qoder.s3.byteark.com/player/v0.3.4/byteark-player.swf',
                 media: {
                     sources: [{
-                        src: $('#secure_url').val()
+                        src: $('#secure_url').val(),
+                        type: 'application/x-mpegURL'
                     }],
                 },
             });
