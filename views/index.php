@@ -99,6 +99,10 @@
                 </div>
                 <h5 class="mt-5">Result</h5>
                 <div id="result" class="form-group">
+                    <label for="secure_url">Generated String to Sign</label>
+                    <textarea class="form-control" name="string_to_sign" readonly><?php echo array_get($response, 'string_to_sign', ''); ?></textarea>
+                </div>
+                <div id="result" class="form-group">
                     <label for="secure_url">Generated Secure URL</label>
                     <input class="form-control" type="text" name="secure_url" value="<?php echo array_get($response, 'secure_url', ''); ?>" readonly>
                 </div>
