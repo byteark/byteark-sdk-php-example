@@ -63,6 +63,20 @@
                     </small>
                 </div>
                 <div class="form-group">
+                    <label for="expires">Client Subnet 16 <span class="text-muted">(Optional)</span></label>
+                    <input class="form-control" type="text" name="client_ip" value="<?php echo array_get($response, 'client_subnet16', ''); ?>">
+                    <small class="form-text text-muted">
+                        Current client Subnet 16 is <?php echo array_get($response, 'current_client_subnet16', ''); ?>
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="expires">Client Subnet 24 <span class="text-muted">(Optional)</span></label>
+                    <input class="form-control" type="text" name="client_ip" value="<?php echo array_get($response, 'client_subnet24', ''); ?>">
+                    <small class="form-text text-muted">
+                        Current client Subnet 24 is <?php echo array_get($response, 'current_client_subnet24', ''); ?>
+                    </small>
+                </div>
+                <div class="form-group">
                     <label for="expires">Referer<span class="text-muted">(Optional)</span></label>
                     <input class="form-control" type="text" name="referer" value="<?php echo array_get($response, 'referer', ''); ?>">
                     <small class="form-text text-muted">
