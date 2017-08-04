@@ -65,7 +65,7 @@ function handle($input) {
             'client_subnet24' => array_get($input, 'client_subnet24'),
             'referer' => array_get($input, 'referer'),
             'user_agent' => array_get($input, 'user_agent'),
-        ])
+        ]);
 
         $stringToSign = $signer->makeStringToSign(
             array_get($input, 'url'),
