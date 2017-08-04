@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>ByteArk Sample Secure URL Generator</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://qoder.s3.byteark.com/player/v0.3.4/byteark-player.min.css">
+        <!-- [if lt IE 9]>
+        <script src="//qoder.s3.byteark.com/player/v0.3.4/byteark-player.ie8.min.css"></script>
+        <![endif]-->
     </head>
     <body>
         <a href="https://github.com/byteark/byteark-sdk-php-example">
@@ -104,15 +108,47 @@
                 </div>
                 <div id="result" class="form-group">
                     <label for="secure_url">Generated Secure URL</label>
-                    <input class="form-control" type="text" name="secure_url" value="<?php echo array_get($response, 'secure_url', ''); ?>" readonly>
+                    <input id="secure_url" class="form-control" type="text" name="secure_url" value="<?php echo array_get($response, 'secure_url', ''); ?>" readonly>
                 </div>
                 <?php if (array_get($response, 'secure_url')) { ?>
                 <div id="result" class="form-group">
-                    <a class="btn btn-primary" target="_blank" href="<?php echo array_get($response, 'secure_url', ''); ?>">Open</a>
-                    <p><smaller>Clicking this link will send this page URL as a referer</smaller></p>
+                    <a id="openLinkButton" class="btn btn-primary" target="_blank" href="<?php echo array_get($response, 'secure_url', ''); ?>">Open</a>
+                    <a id="showImageButton" class="btn btn-primary" href="#preview">Show Image</a>
+                    <a id="showVideoButton" class="btn btn-primary" href="#preview">Show Video</a>
                 </div>
                 <?php } ?>
+                <div id="preview" class="form-group">
+                </div>
             </form>
         </div>
     </body>
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.js"
+        integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
+        crossorigin="anonymous"></script>
+    <script src="https://qoder.s3.byteark.com/player/v0.3.4/byteark-player.min.js"></script>
+    <script>
+        $('#showImageButton').click(function() {
+            $('#preview').empty();
+
+            var img = $('<img>');
+            img.attr('src', $('#secure_url').val());
+            img.appendTo('#preview');
+        });
+        $('#showVideoButton').click(function() {
+            $('#preview').empty();
+
+            var playerElement = $('<div id="player">');
+            playerElement.appendTo('#preview');
+
+            byteark('player', {
+                swf: 'https://qoder.s3.byteark.com/player/v0.3.4/byteark-player.swf',
+                media: {
+                    sources: [{
+                        src: $('#secure_url').val()
+                    }],
+                },
+            });
+        });
+    </script>
 </html>
