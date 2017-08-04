@@ -32,15 +32,14 @@ function nextWeekAtMidnight($from) {
 }
 
 function makeDefaultResponseFields() {
-    $whip = new \Vectorface\Whip\Whip(\Vectorface\Whip\Whip::REMOTE_ADDR);
-    $clientIp = $whip->getValidIpAddress();
+    $requestInfo = new \ByteArk\Request\RequestInfo();
     $now = time();
 
     return [
-        'current_client_ip' => $clientIp,
-        'current_client_subnet16' => long2ip(ip2long($clientIp) & ip2long('255.255.0.0')),
-        'current_client_subnet24' => long2ip(ip2long($clientIp) & ip2long('255.255.255.0')),
-        'current_user_agent' => array_get($_SERVER, 'HTTP_USER_AGENT', ''),
+        'current_client_ip' => $requestInfo->get('client_ip'),
+        'current_client_subnet16' => $requestInfo->get('client_subnet16'),
+        'current_client_subnet24' => $requestInfo->get('client_subnet24'),
+        'current_user_agent' => $requestInfo->get('user_agent'),
         'current_timestamp' => $now,
         'suggested_expires' => nextWeekAtMidnight($now),
     ];
@@ -58,19 +57,34 @@ function handle($input) {
             'skip_url_encoding' => array_get($input, 'skip_url_encoding'. false),
         ]);
 
+        $options = array_filter([
+            'method' => array_get($input, 'method'),
+            'path_prefix' => array_get($input, 'path_prefix'),
+            'client_ip' => array_get($input, 'client_ip'),
+            'client_subnet16' => array_get($input, 'client_subnet16'),
+            'client_subnet24' => array_get($input, 'client_subnet24'),
+            'referer' => array_get($input, 'referer'),
+            'user_agent' => array_get($input, 'user_agent'),
+        ])
+
+        $stringToSign = $signer->makeStringToSign(
+            array_get($input, 'url'),
+            (int) array_get($input, 'expires'),
+            $options
+        );
+
         $signedUrl = $signer->sign(
             array_get($input, 'url'),
             (int) array_get($input, 'expires'),
-            array_filter([
-                'method' => array_get($input, 'method'),
-                'path_prefix' => array_get($input, 'path_prefix'),
-                'client_ip' => array_get($input, 'client_ip'),
-                'referer' => array_get($input, 'referer'),
-                'user_agent' => array_get($input, 'user_agent'),
-            ])
+            $options
         );
 
-        return ['secure_url' => $signedUrl] + makeDefaultResponseFields() + $input;
+        return [
+            'string_to_sign' => $stringToSign,
+            'secure_url' => $signedUrl,
+          ]
+          + makeDefaultResponseFields()
+          + $input;
     } catch (\Exception $e) {
         return ['error' => $e->getMessage()] + makeDefaultResponseFields() + $input;
     }
