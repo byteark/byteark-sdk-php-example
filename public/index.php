@@ -34,7 +34,7 @@ function nextWeekAtMidnight($from) {
 function removeSecretFromStringToSign($stringToSign) {
     $lines = explode("\n", $stringToSign);
     array_pop($lines);
-    return implode("\n", $stringToSign);
+    return implode("\n", $lines);
 }
 
 function makeDefaultResponseFields() {
