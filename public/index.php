@@ -73,7 +73,7 @@ function handle($input) {
             'user_agent' => array_get($input, 'user_agent'),
         ]);
 
-        $stringToSign = $this->removeSecretFromStringToSign(
+        $stringToSign = removeSecretFromStringToSign(
             $signer->makeStringToSign(
                 array_get($input, 'url'),
                 (int) array_get($input, 'expires'),
