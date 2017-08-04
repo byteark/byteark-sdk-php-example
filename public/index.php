@@ -31,6 +31,12 @@ function nextWeekAtMidnight($from) {
     return $from - ($from % 86400) + (86400 * 7);
 }
 
+function removeSecretFromStringToSign($stringToSign) {
+    $lines = explode("\n", $stringToSign);
+    array_pop($lines);
+    return implode("\n", $stringToSign);
+}
+
 function makeDefaultResponseFields() {
     $requestInfo = new \ByteArk\Request\RequestInfo();
     $now = time();
@@ -67,10 +73,12 @@ function handle($input) {
             'user_agent' => array_get($input, 'user_agent'),
         ]);
 
-        $stringToSign = $signer->makeStringToSign(
-            array_get($input, 'url'),
-            (int) array_get($input, 'expires'),
-            $options
+        $stringToSign = $this->removeSecretFromStringToSign(
+            $signer->makeStringToSign(
+                array_get($input, 'url'),
+                (int) array_get($input, 'expires'),
+                $options
+            )
         );
 
         $signedUrl = $signer->sign(

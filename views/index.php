@@ -103,7 +103,7 @@
                 </div>
                 <h5 class="mt-5">Result</h5>
                 <div id="result" class="form-group">
-                    <label for="secure_url">Generated String to Sign</label>
+                    <label for="secure_url">Generated String to Sign (Last line with secret are excluded for security reason)</label>
                     <textarea class="form-control" name="string_to_sign" readonly><?php echo array_get($response, 'string_to_sign', ''); ?></textarea>
                 </div>
                 <div id="result" class="form-group">
