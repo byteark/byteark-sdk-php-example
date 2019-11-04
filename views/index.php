@@ -60,6 +60,20 @@
                     </small>
                 </div>
                 <div class="form-group">
+                    <label for="expires">Geo Allow Country <span class="text-muted">(Optional)</span></label>
+                    <input class="form-control" type="text" name="geo_allow" value="<?php echo array_get($response, 'geo_allow', ''); ?>">
+                    <small class="form-text text-muted">
+                        Comma separated list of countries allowing to access the specified URL
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="expires">Geo Block Country <span class="text-muted">(Optional)</span></label>
+                    <input class="form-control" type="text" name="geo_block" value="<?php echo array_get($response, 'geo_block', ''); ?>">
+                    <small class="form-text text-muted">
+                        Comma separated list of countries which will denied access to the specified URL (this takes precedence 'over' geo allow country)
+                    </small>
+                </div>
+                <div class="form-group">
                     <label for="expires">Client IP <span class="text-muted">(Optional)</span></label>
                     <input class="form-control" type="text" name="client_ip" value="<?php echo array_get($response, 'client_ip', ''); ?>">
                     <small class="form-text text-muted">
@@ -67,17 +81,10 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label for="expires">Client Subnet 24 <span class="text-muted">(Optional)</span></label>
-                    <input class="form-control" type="text" name="client_subnet24" value="<?php echo array_get($response, 'client_subnet24', ''); ?>">
+                    <label for="expires">Origin<span class="text-muted">(Optional)</span></label>
+                    <input class="form-control" type="text" name="referer" value="<?php echo array_get($response, 'origin', ''); ?>">
                     <small class="form-text text-muted">
-                        Current client Subnet 24 is <?php echo array_get($response, 'current_client_subnet24', ''); ?>
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label for="expires">Client Subnet 16 <span class="text-muted">(Optional)</span></label>
-                    <input class="form-control" type="text" name="client_subnet16" value="<?php echo array_get($response, 'client_subnet16', ''); ?>">
-                    <small class="form-text text-muted">
-                        Current client Subnet 16 is <?php echo array_get($response, 'current_client_subnet16', ''); ?>
+                      To testing opening withinin this page, please use this value: https://docs.byteark.com
                     </small>
                 </div>
                 <div class="form-group">

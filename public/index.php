@@ -67,9 +67,10 @@ function handle($input) {
             'method' => array_get($input, 'method'),
             'path_prefix' => array_get($input, 'path_prefix'),
             'client_ip' => array_get($input, 'client_ip'),
-            'client_subnet16' => array_get($input, 'client_subnet16'),
-            'client_subnet24' => array_get($input, 'client_subnet24'),
             'referer' => array_get($input, 'referer'),
+            'origin' => array_get($input, 'origin'),
+            'geo_allow' => array_get($input, 'geo_allow'),
+            'geo_block' => array_get($input, 'geo_block'),
             'user_agent' => array_get($input, 'user_agent'),
         ]);
 
