@@ -66,6 +66,7 @@ function handle($input) {
         $options = array_filter([
             'method' => array_get($input, 'method'),
             'path_prefix' => array_get($input, 'path_prefix'),
+            'max_resolution' => array_get($input, 'max_resolution'),
             'client_ip' => array_get($input, 'client_ip'),
             'referer' => array_get($input, 'referer'),
             'origin' => array_get($input, 'origin'),

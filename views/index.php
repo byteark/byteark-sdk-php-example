@@ -74,10 +74,10 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label for="expires">Client IP <span class="text-muted">(Optional)</span></label>
-                    <input class="form-control" type="text" name="client_ip" value="<?php echo array_get($response, 'client_ip', ''); ?>">
+                    <label for="expires">Max Resolution <span class="text-muted">(Optional)</span></label>
+                    <input class="form-control" type="text" name="max_resolution" value="<?php echo array_get($response, 'max_resolution', ''); ?>">
                     <small class="form-text text-muted">
-                        Current client IP is <?php echo array_get($response, 'current_client_ip', ''); ?>
+                        Max resolution for the video (available for some services only)
                     </small>
                 </div>
                 <div class="form-group">
@@ -95,7 +95,14 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <label for="expires">User Agent <span class="text-muted">(Optional)</span></label>
+                    <label for="expires">Client IP <span class="text-muted">(Optional, Legacy)</span></label>
+                    <input class="form-control" type="text" name="client_ip" value="<?php echo array_get($response, 'client_ip', ''); ?>">
+                    <small class="form-text text-muted">
+                        Current client IP is <?php echo array_get($response, 'current_client_ip', ''); ?>
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="expires">User Agent <span class="text-muted">(Optional, Legacy)</span></label>
                     <input class="form-control" type="text" name="user_agent" value="<?php echo array_get($response, 'user_agent', ''); ?>">
                     <small class="form-text text-muted">
                         Current user agent is <?php echo array_get($response, 'current_user_agent', ''); ?>
